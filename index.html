@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <button type="submit" id="submit-long">Display long quotes</button>
+    <button type="submit" id="submit-short">Display short quotes</button>
+
+    <div id="quotes"></div>
+
+    <script>
+    //Search for long quotes (5 or more words)
+      $("#submit-long").on("click", function(e) {
+        e.preventDefault();
+        $("#quotes").empty();
+
+        var queryUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/20";
+        $.ajax({
+          method: "GET",
+          url: queryUrl
+        }).then(response => {
+          console.log(response);
+          var ltitle = $(`<h1>Long Quotes</h1>`);
+          $("#quotes").append(ltitle);
+
+          for (var i = 0; i < response.length; i++) {
+            var quoteArr = response[i].split(" ");
+            if (quoteArr.length >= 5) {
+              
+              var longQuote = $(`<h3>${quoteArr.join(" ")}</h3>`);
+              $("#quotes").append(longQuote);
+            }
+          }
+        });
+      });
+
+      //Search for short quotes (4 words or less)
+      $("#submit-short").on("click", function(e) {
+        e.preventDefault();
+        $("#quotes").empty();
+
+        var queryUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/20";
+        $.ajax({
+          method: "GET",
+          url: queryUrl
+        }).then(response => {
+          //console.log(response);
+
+          var stitle = $(`<h1>Short Quotes</h1>`);
+          $("#quotes").append(stitle);
+
+          for (var i = 0; i < response.length; i++) {
+            var quoteArr = response[i].split(" ");
+            console.log(quoteArr);
+            if (quoteArr.length <= 4) {
+
+              var shortQuote = $(`<h3>${quoteArr.join(" ")}</h3>`);
+              $("#quotes").append(shortQuote);
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
