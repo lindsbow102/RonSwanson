@@ -25,14 +25,14 @@
           url: queryUrl
         }).then(response => {
           console.log(response);
-          const ltitle = $(`<h1>Long Quotes</h1>`);
+          const ltitle = $(`<h1>Long Quotes.  Click on a quote to rate it!</h1>`);
           $("#quotes").append(ltitle);
 
           for (let i = 0; i < response.length; i++) {
             const quoteArr = response[i].split(" ");
             if (quoteArr.length >= 5) {
               
-              const longQuote = $(`<h3>${quoteArr.join(" ")}</h3><button id="rate">Rate this Quote</button>`);
+              const longQuote = $(`<h3 class="rate" data-quote="quote-${[i]}">${quoteArr.join(" ")}</h3>`);
               $("#quotes").append(longQuote);
             }
           }
@@ -50,15 +50,16 @@
         }).then(response => {
           //console.log(response);
 
-          const stitle = $(`<h1>Short Quotes</h1>`);
+          const stitle = $(`<h1>Short Quotes.  Click on a quote to rate it!</h1>`);
           $("#quotes").append(stitle);
 
           for (let i = 0; i < response.length; i++) {
             const quoteArr = response[i].split(" ");
-            console.log(quoteArr);
+            //console.log(quoteArr);
             if (quoteArr.length <= 4) {
 
-              const shortQuote = $(`<h3>${quoteArr.join(" ")}</h3><button id="rate">Rate this Quote</button>`);
+              const shortQuote = $(`<h3 class="rate" data-quote="quote-${[i]}">${quoteArr.join(" ")}</h3>`
+                );
               $("#quotes").append(shortQuote);
             }
           }
@@ -66,8 +67,10 @@
       });
 
       // To rate a quote
-      $(document).on("click", "#rate", () => {
-        alert("You clicked the rate button.  Rate functionatity will be up shortly");
+      $(document).on("click", ".rate", function() {
+        //console.log(this);
+        //console.log($(this).text());
+        prompt(`On a scale of 1 to 5, what do you think of this Quote? ... "${$(this).text()}"`);
       });
     </script>
   </body>
