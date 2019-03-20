@@ -1,8 +1,11 @@
 $(document).ready(function() {
-    $("#quotes").hide();
+    // Hide empty Quotes div until it is populted with quotes
+  $("#quotes").hide();
+
+  // Query URL for ajax calls
   const queryUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/20";
 
-  //Search for long quotes (5 or more words)
+  //Search for long quotes (8 or more words)
   $("#submit-long").on("click", function(e) {
     e.preventDefault();
 
@@ -20,7 +23,7 @@ $(document).ready(function() {
 
       for (let i = 0; i < response.length; i++) {
         const quoteArr = response[i].split(" ");
-        if (quoteArr.length >= 5) {
+        if (quoteArr.length >= 8) {
           const longQuote = $(
             `<h3 class="rate" data-quote="quote-${[i]}">${quoteArr.join(
               " "
@@ -32,10 +35,10 @@ $(document).ready(function() {
     });
   });
 
-  //Search for short quotes (4 words or less)
+  //Search for short quotes (7 words or less)
   $("#submit-short").on("click", function(e) {
     e.preventDefault();
-    
+
     $("#quotes").empty();
     $("#quotes").show();
 
@@ -52,7 +55,7 @@ $(document).ready(function() {
       for (let i = 0; i < response.length; i++) {
         const quoteArr = response[i].split(" ");
         console.log(quoteArr);
-        if (quoteArr.length <= 4) {
+        if (quoteArr.length <= 7) {
           const shortQuote = $(
             `<h3 class="rate" data-quote="quote-${[i]}">${quoteArr.join(
               " "
