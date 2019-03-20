@@ -73,7 +73,7 @@ $(document).ready(function() {
     //console.log(this);
     //console.log($(this).text());
     prompt(
-      `On a scale of 1 to 5, what do you think of this Quote? ... "${$(
+      `On a scale of 1 to 5, please rate this quote ... "${$(
         this
       ).text()}"`
     );
