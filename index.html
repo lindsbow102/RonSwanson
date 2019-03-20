@@ -4,74 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery.js"></script>
     <title>Ron Swanson</title>
   </head>
   <body>
+    <h1>Welcome to the Ron Swanson Page of Quotes</h1>
     <button type="submit" id="submit-long">Display long quotes</button>
     <button type="submit" id="submit-short">Display short quotes</button>
 
     <div id="quotes"></div>
 
-    <script>
-    const queryUrl = "https://ron-swanson-quotes.herokuapp.com/v2/quotes/20";
-    //Search for long quotes (5 or more words)
-      $("#submit-long").on("click", function(e) {
-        e.preventDefault();
-        $("#quotes").empty();
-        
-        $.ajax({
-          method: "GET",
-          url: queryUrl
-        }).then(response => {
-          console.log(response);
-          const ltitle = $(`<h1>Long Quotes.  Click on a quote to rate it!</h1>`);
-          $("#quotes").append(ltitle);
-
-          for (let i = 0; i < response.length; i++) {
-            const quoteArr = response[i].split(" ");
-            if (quoteArr.length >= 5) {
-              
-              const longQuote = $(`<h3 class="rate" data-quote="quote-${[i]}">${quoteArr.join(" ")}</h3>`);
-              $("#quotes").append(longQuote);
-            }
-          }
-        });
-      });
-
-      //Search for short quotes (4 words or less)
-      $("#submit-short").on("click", function(e) {
-        e.preventDefault();
-        $("#quotes").empty();
-
-        $.ajax({
-          method: "GET",
-          url: queryUrl
-        }).then(response => {
-          //console.log(response);
-
-          const stitle = $(`<h1>Short Quotes.  Click on a quote to rate it!</h1>`);
-          $("#quotes").append(stitle);
-
-          for (let i = 0; i < response.length; i++) {
-            const quoteArr = response[i].split(" ");
-            //console.log(quoteArr);
-            if (quoteArr.length <= 4) {
-
-              const shortQuote = $(`<h3 class="rate" data-quote="quote-${[i]}">${quoteArr.join(" ")}</h3>`
-                );
-              $("#quotes").append(shortQuote);
-            }
-          }
-        });
-      });
-
-      // To rate a quote
-      $(document).on("click", ".rate", function() {
-        //console.log(this);
-        //console.log($(this).text());
-        prompt(`On a scale of 1 to 5, what do you think of this Quote? ... "${$(this).text()}"`);
-      });
-    </script>
+    <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
