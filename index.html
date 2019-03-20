@@ -32,7 +32,7 @@
             const quoteArr = response[i].split(" ");
             if (quoteArr.length >= 5) {
               
-              const longQuote = $(`<h3>${quoteArr.join(" ")}</h3>`);
+              const longQuote = $(`<h3>${quoteArr.join(" ")}</h3><button id="rate">Rate this Quote</button>`);
               $("#quotes").append(longQuote);
             }
           }
@@ -58,11 +58,16 @@
             console.log(quoteArr);
             if (quoteArr.length <= 4) {
 
-              const shortQuote = $(`<h3>${quoteArr.join(" ")}</h3>`);
+              const shortQuote = $(`<h3>${quoteArr.join(" ")}</h3><button id="rate">Rate this Quote</button>`);
               $("#quotes").append(shortQuote);
             }
           }
         });
+      });
+
+      // To rate a quote
+      $(document).on("click", "#rate", () => {
+        alert("You clicked the rate button.  Rate functionatity will be up shortly");
       });
     </script>
   </body>
